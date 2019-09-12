@@ -5,3 +5,11 @@
  */
 
 // You can delete this file if you're not using it
+
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  actions.setWebpackConfig({
+    node: {
+      fs: false,
+    },
+  })
+}

@@ -1,0 +1,41 @@
+.grid {
+	display: grid;
+	height: 100vh;
+	grid-template-columns: 100px 100px 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"quote quote addons"
+		"buttons links interact"
+		"function function function";
+}
+
+.quotesArea {
+	grid-area: quote;
+}
+
+.addonArea {
+	grid-area: addons;
+	text-align: right;
+}
+
+.buttonArea {
+	grid-area: buttons;
+}
+
+.linksArea {
+	grid-area: links;
+}
+
+.interactArea {
+	grid-area: interact;
+	background-color: beige;
+}
+
+.functionArea {
+	grid-area: function;
+	display: flex;
+	flex-direction: row;
+	button {
+		flex-basis: 100%;
+	}
+}
