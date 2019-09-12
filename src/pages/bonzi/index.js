@@ -18,36 +18,46 @@ class BonziBuddy extends Component {
     this.up = true
   }
   onMouseDown(e) {
-    this.mouseX = e.clientX
-    this.mouseY = e.clientY
-    requestAnimationFrame(this.moveWindow)
-    e.preventDefault()
+    if (window.require) {
+      this.mouseX = e.clientX
+      this.mouseY = e.clientY
+      requestAnimationFrame(this.moveWindow)
+      e.preventDefault()
+    }
   }
   onMouseUp(e) {
-    window.require("electron").ipcRenderer.send("windowMoved")
-    cancelAnimationFrame(this.animationId)
+    if (window.require) {
+      window.require("electron").ipcRenderer.send("windowMoved")
+      cancelAnimationFrame(this.animationId)
+    }
   }
   moveWindow() {
-    window.require("electron").ipcRenderer.send("windowMoving", {
-      mouseX: this.mouseX,
-      mouseY: this.mouseY,
-    })
-    this.animationId = requestAnimationFrame(this.moveWindow)
+    if (window.require) {
+      window.require("electron").ipcRenderer.send("windowMoving", {
+        mouseX: this.mouseX,
+        mouseY: this.mouseY,
+      })
+      this.animationId = requestAnimationFrame(this.moveWindow)
+    }
   }
   onRightClick() {
-    const { remote } = window.require("electron")
-    const menu = createMenu(this.agent)
-    menu.popup({
-      window: remote.getCurrentWindow(),
-    })
+    if (window.require) {
+      const { remote } = window.require("electron")
+      const menu = createMenu(this.agent)
+      menu.popup({
+        window: remote.getCurrentWindow(),
+      })
+    }
   }
   componentDidMount() {
-    const electron = window.require("electron")
-    electron.ipcRenderer.on("closeProgram", () => {
-      this.agent.play("Hide", undefined, () => {
-        electron.ipcRenderer.send("closeProgram", 0)
+    if (window.require) {
+      const electron = window.require("electron");
+      electron.ipcRenderer.on("closeProgram", () => {
+        this.agent.play("Hide", undefined, () => {
+          electron.ipcRenderer.send("closeProgram", 0)
+        })
       })
-    })
+    }
 
     // Load clippy
     clippy.load(
