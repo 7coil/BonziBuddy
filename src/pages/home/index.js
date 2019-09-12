@@ -17,11 +17,34 @@ import calendarButton from './img/calendar.png';
 import favicon from './img/favicon.png';
 
 class HomePage extends Component {
-  exit() {
-    window.require("electron").ipcRenderer.send("closeProgram")
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      invite: 'https://discordapp.com/invite/wHgdmf4'
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
-  openLink(link) {
-    return () => window.require("electron").shell.openExternal(link)
+  componentDidMount() {
+    fetch('https://discordapp.com/api/guilds/226404143999221761/widget.json')
+      .then(data => data.json())
+      .then((data) => {
+        console.log(data);
+        if (data.instant_invite) {
+          this.setState({
+            invite: data.instant_invite
+          })
+        }
+      })
+  }
+  exit() {
+    if (window.require) window.require("electron").ipcRenderer.send("closeProgram")
+  }
+  handleClick(e) {
+    if (window.require) {
+      window.require("electron").shell.openExternal(e.target.href)
+      e.preventDefault();
+    }
   }
   render() {
     return (
@@ -45,20 +68,20 @@ class HomePage extends Component {
         <div className={styles.linksArea}>
           <div>
             <img alt="E-Mail Icon" src={emailButton} />
-            <a href="#email" onClick={this.openLink('https://mail.google.com/')}>E-Mail</a>
+            <a href="https://mail.google.com/" onClick={this.handleClick}>E-Mail</a>
           </div>
           <div>
             <img alt="Buddies Online Icon" src={buddiesOnlineButton} />
-            <a href="#buddies" onClick={this.openLink('https://mail.google.com/')}>Buddies Online</a>
+            <a href={this.state.invite} onClick={this.handleClick}>Buddies Online</a>
           </div>
           <div>
             <img alt="Calendar Icon" src={calendarButton} />
-            <a href="#calendar" onClick={this.openLink('https://calendar.google.com/')}>Calendar</a>
+            <a href="https://calendar.google.com/" onClick={this.handleClick}>Calendar</a>
           </div>
         </div>
         <div className={styles.interactArea}></div>
         <div className={styles.functionArea}>
-          <button onClick={this.openLink('https://github.com/7coil/BonziBuddy/wiki')}>Help</button>
+          <button href="https://github.com/7coil/BonziBuddy/wiki" onClick={this.handleClick}>Help</button>
           <button>Options</button>
           <button>Update Me</button>
           <button>Sleep F9</button>
