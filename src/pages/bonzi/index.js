@@ -1,8 +1,34 @@
 import clippy from "clippyjs"
 import React, { Component } from "react"
 import { Helmet } from "react-helmet"
-import createMenu from "./menu"
 import "./styles.scss"
+
+const createMenu = () => {
+  if (typeof window === 'undefined') return;
+  const { remote, ipcRenderer } = window.require("electron")
+  const { Menu, MenuItem } = remote
+
+  const menu = new Menu()
+  menu.append(
+    new MenuItem({
+      label: "My Home",
+      click() {
+        ipcRenderer.send("openMainMenu")
+      },
+    })
+  )
+
+  menu.append(
+    new MenuItem({
+      label: "Goodbye",
+      click() {
+        ipcRenderer.send("closeProgram")
+      },
+    })
+  )
+
+  return menu
+}
 
 class BonziBuddy extends Component {
   constructor(props) {
