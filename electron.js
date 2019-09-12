@@ -6,8 +6,8 @@ let main, home
 const createHomeMenu = () => {
   if (home) return
   home = new BrowserWindow({
-    width: 700,
-    height: 500,
+    width: 658,
+    height: 436,
     maximizable: false,
     autoHideMenuBar: true,
     icon: __dirname + "/static/favicon.ico",
@@ -32,6 +32,7 @@ const createWindow = () => {
     // focusable: false,
     maximizable: false,
     alwaysOnTop: true,
+    resizable: false,
     icon: __dirname + "/static/favicon.ico",
     webPreferences: {
       nodeIntegration: true,

@@ -15,7 +15,7 @@ _this is an unofficial BonziBuddy_
 Simultaneously run `gatsby develop` and `yarn electron electron` at the same time.
 
 ## Animated Gif
-![wow amazing](.github/xpYY5A7Id6.gif)
+![wow amazing](.github/Xb4H0h7GWm.gif)
 
 ## Thanks
 - [ClippyJS](https://www.smore.com/clippy-js)

@@ -1,16 +1,27 @@
 .grid {
 	display: grid;
-	height: 100vh;
-	grid-template-columns: 100px 100px 1fr;
-	grid-template-rows: auto 1fr auto;
+	height: 397px;
+	width: 642px;
+	overflow: hidden;
+	grid-template-columns: 130px 100px 1fr;
+	grid-template-rows: 77px 1fr auto;
 	grid-template-areas:
 		"quote quote addons"
 		"buttons links interact"
 		"function function function";
+
+	background-image: url('./img/topLeaves.png'), url('./img/leftLeaves.png'), url('./img/rightLeaves.png'), url('./img/bottomLeaves.png');
+	background-position: top, left, right, bottom;
+	background-repeat: no-repeat;
 }
 
-.quotesArea {
-	grid-area: quote;
+.background {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 4;
+	background-image: url('./img/topLeaves.png');
+	background-repeat: no-repeat;
 }
 
 .addonArea {
@@ -24,11 +35,25 @@
 
 .linksArea {
 	grid-area: links;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: 10pt;
+	}
 }
 
 .interactArea {
+	box-sizing: border-box;
+	margin: 5px;
 	grid-area: interact;
-	background-color: beige;
+	background-color: #FFFFC6;
+	background-image: url('./img/interactBackground.png');
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .functionArea {
@@ -36,6 +61,9 @@
 	display: flex;
 	flex-direction: row;
 	button {
+		color: white;
+		font-weight: bold;
 		flex-basis: 100%;
+		background-color: transparent;
 	}
 }
