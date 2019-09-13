@@ -40,10 +40,21 @@ class HomePage extends Component {
   exit() {
     if (window.require) window.require("electron").ipcRenderer.send("closeProgram")
   }
+  settings() {
+    if (window.require) window.require("electron").ipcRenderer.send("openSettingsMenu")
+  }
   handleClick(e) {
+    const getLink = (element) => {
+      if (element.attributes.href && element.attributes.href.value && !element.attributes.href.value.startsWith('#')) return element.attributes.href.value;
+      if (element.parentElement) return getLink(element.parentElement);
+      return null;
+    }
     if (window.require) {
-      window.require("electron").shell.openExternal(e.target.href)
-      e.preventDefault();
+      const link = getLink(e.target);
+      if (link) {
+        window.require("electron").shell.openExternal(link)
+        e.preventDefault();
+      }
     }
   }
   render() {
@@ -57,13 +68,13 @@ class HomePage extends Component {
           <img alt="Check for New Add-Ons..." src={addonsButton} />
         </div>
         <div className={styles.buttonArea}>
-          <img alt="Home Button" src={homeButton} />
-          <img alt="Entertainment Button" src={entertainmentButton} />
-          <img alt="Sports Button" src={sportsButton} />
-          <img alt="Travel Button" src={travelButton} />
-          <img alt="Shopping Button" src={shoppingButton} />
-          <img alt="Games Button" src={gamesButton} />
-          <img alt="Finance Button" src={financeButton} />
+          <a href="#" onClick={this.handleClick}><img alt="Home Button" src={homeButton} /></a>
+          <a href="https://www.bbc.co.uk/news/entertainment_and_arts" onClick={this.handleClick}><img alt="Entertainment Button" src={entertainmentButton} /></a>
+          <a href="https://www.bbc.co.uk/sport" onClick={this.handleClick}><img alt="Sports Button" src={sportsButton} /></a>
+          <a href="#" onClick={this.handleClick}><img alt="Travel Button" src={travelButton} /></a>
+          <a href="#" onClick={this.handleClick}><img alt="Shopping Button" src={shoppingButton} /></a>
+          <a href="#" onClick={this.handleClick}><img alt="Games Button" src={gamesButton} /></a>
+          <a href="https://www.bbc.co.uk/news/business" onClick={this.handleClick}><img alt="Finance Button" src={financeButton} /></a>
         </div>
         <div className={styles.linksArea}>
           <div>
@@ -82,7 +93,7 @@ class HomePage extends Component {
         <div className={styles.interactArea}></div>
         <div className={styles.functionArea}>
           <button href="https://github.com/7coil/BonziBuddy/wiki" onClick={this.handleClick}>Help</button>
-          <button>Options</button>
+          <button onClick={this.settings}>Options</button>
           <button>Update Me</button>
           <button>Sleep F9</button>
           <button>Hide</button>

@@ -1,9 +1,27 @@
 const { app, BrowserWindow, ipcMain } = require("electron")
 const electron = require("electron")
 
-let main, home
+let main, home, settings
 
 const urlBase = process.env.NODE_ENV === 'production' ? 'https://bonzibuddy.netlify.com' : 'http://127.0.0.1:8000'
+
+const createSettingsMenu = () => {
+  if (settings) return;
+  settings = new BrowserWindow({
+    width: 800,
+    height: 600,
+    icon: __dirname + "/static/favicon.ico",
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
+
+  settings.on("close", () => {
+    settings = null
+  })
+
+  settings.loadURL(`${urlBase}/settings`)
+}
 
 const createHomeMenu = () => {
   if (home) return
@@ -60,6 +78,7 @@ const createWindow = () => {
   })
 
   ipcMain.on("openMainMenu", createHomeMenu)
+  ipcMain.on("openSettingsMenu", createSettingsMenu)
 
   main.loadURL(`${urlBase}/bonzi`)
 }

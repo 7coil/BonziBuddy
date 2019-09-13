@@ -1,0 +1,38 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 6fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas:
+		"header header"
+		"sidebar content";
+	height: 100vh;
+}
+
+.header {
+	grid-area: header;
+	padding: 0 1em;
+}
+
+.navigation {
+	grid-area: sidebar;
+	background-color: lightgrey;
+	.navigationButton {
+		margin: 0;
+		padding: 1em;
+	}
+	.navigationSelected {
+		background-color: grey;
+	}
+}
+
+.content {
+	grid-area: content;
+	padding: 0 1em;
+	overflow-y: scroll;
+}
+
+.microsoftAgent {
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
