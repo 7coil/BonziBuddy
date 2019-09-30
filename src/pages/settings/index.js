@@ -5,6 +5,7 @@ import packageJson from '../../../package.json';
 import styles from './index.module.scss';
 import microsoftAgent from './img/agent.png';
 import CombineStyles from '../../helpers/CombineStyles.js';
+import HyperlinkConfigurator from '../../components/HyperlinkConfigurator/index.js';
 
 class SettingsPage extends Component {
 	constructor(props) {
@@ -34,6 +35,7 @@ class SettingsPage extends Component {
 			</div>
 			<div className={styles.navigation}>
 				<p className={CombineStyles(styles.navigationButton, this.state.menu === 'salutation' && styles.navigationSelected)} onClick={this.setMenu('salutation')}>Salutation</p>
+				<p className={CombineStyles(styles.navigationButton, this.state.menu === 'hyperlinks' && styles.navigationSelected)} onClick={this.setMenu('hyperlinks')}>Hyperlinks</p>
 				<p className={CombineStyles(styles.navigationButton, this.state.menu === 'copyright' && styles.navigationSelected)} onClick={this.setMenu('copyright')}>Copyright</p>
 			</div>
 			{
@@ -41,6 +43,12 @@ class SettingsPage extends Component {
 				<div className={styles.content}>
 					<p>Enter your name or a name that you would like to be called and press OK.</p>
 					<input></input>
+				</div>
+			}
+			{
+				this.state.menu === 'hyperlinks' &&
+				<div className={styles.content}>
+					<HyperlinkConfigurator />
 				</div>
 			}
 			{
