@@ -3,7 +3,7 @@
   "private": true,
   "description": "Your very own desktop personal digital assistant",
   "version": "5.0.0",
-  "author": "Katielabs <katie@discordmail.com>",
+  "author": "Leondro Lio <github@leondrolio.com>",
   "dependencies": {
     "clippyjs": "^0.0.3",
     "electron": "^8.2.1",
@@ -16,11 +16,11 @@
     "gatsby-plugin-sharp": "^2.5.4",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.4",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^6.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

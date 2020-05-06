@@ -87,17 +87,21 @@ class BonziBuddy extends Component {
 
     // Load clippy
     clippy.load(
-      "Bonzi",
+      'Bonzi',
       agent => {
         this.agent = agent
         agent.show()
         agent.animate()
-        console.log(agent.animations())
+        console.log(agent)
+        if (window.require) {
+          const electron = window.require("electron");
+          electron.ipcRenderer.send('resizeWindow', agent._animator._data.framesize)
+        }
       },
       err => {
         console.log(err)
       },
-      "/"
+      "/clippy.js/agents/"
     )
   }
   render() {

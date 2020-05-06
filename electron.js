@@ -64,6 +64,10 @@ const createWindow = () => {
     main.setPosition(x - mouseX, y - mouseY)
   })
 
+  ipcMain.on('resizeWindow', (e, [width, height]) => {
+    main.setSize(width, height)
+  })
+
   ipcMain.on("windowMoved", () => {
     // Do somehting when dragging stop
   })

@@ -1,0 +1,3 @@
+[submodule "static/clippy.js"]
+	path = static/clippy.js
+	url = https://github.com/smore-inc/clippy.js
