@@ -87,4 +87,12 @@ const createWindow = () => {
   main.loadURL(`${urlBase}/bonzi`)
 }
 
-app.on("ready", createWindow)
+if(process.platform === "linux") {
+  app.commandLine.appendSwitch('enable-transparent-visuals')
+  app.commandLine.appendSwitch('force-cpu-draw')
+  app.commandLine.appendSwitch('disable-gpu')
+  app.on('ready', () => setTimeout(createWindow, 400));
+} else {
+  app.on("ready", createWindow)
+}
+
